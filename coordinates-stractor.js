@@ -313,4 +313,4 @@ async function main() {
     dialog.showModal();
 }
 
-await main();
+main();
