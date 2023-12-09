@@ -1,4 +1,3 @@
-(() => {
 async function getAllyData() {
     const endpoint = '/map/ally.txt';
 
@@ -311,6 +310,4 @@ async function main() {
     dialog.showModal();
 }
 
-await main();
-
-})();
+main();
