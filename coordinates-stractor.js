@@ -9,7 +9,7 @@ async function getAllyData() {
 
     const result = allys.map(x => x.split(',')).map(x => ({
         id: +x[0],
-        name: x[1],
+        name: decodeURI(x[1]).replace(/\+/g, ' '),
         tag: x[2],
         members: +x[3],
         villages: +x[4],
@@ -18,10 +18,7 @@ async function getAllyData() {
         rank: +x[7]
     }))
 
-    //name
-    result.filter(x => typeof x.name === 'string').sort((a, b) => a.name.localeCompare(b.name));
-
-    return result;
+    return result.filter(x => typeof x.name === 'string').sort((a, b) => a.name.localeCompare(b.name));
 }
 
 async function getPlayerData() {
@@ -35,16 +32,14 @@ async function getPlayerData() {
 
     const result = players.map(z => z.split(',')).map(x => ({
         id: +x[0],
-        name: x[1],
+        name: decodeURI(x[1]).replace(/\+/g, ' '),
         ally: +x[2],
         villages: +x[3],
         points: +x[4],
         rank: +x[5]
     }));
 
-    result.filter(x => typeof x.name === 'string').sort((a, b) => a.name.localeCompare(b.name));
-
-    return result;
+    return result.filter(x => typeof x.name === 'string').sort((a, b) => a.name.localeCompare(b.name));
 }
 
 async function getVillageData() {
@@ -56,7 +51,7 @@ async function getVillageData() {
 
     const villages = text.split('\n');
 
-    return villages.map(z => z.split(',')).map(x => ({
+    const result = villages.map(z => z.split(',')).map(x => ({
         id: +x[0],
         name: x[1],
         coordinates: x[2] + '|' + x[3],
@@ -64,6 +59,8 @@ async function getVillageData() {
         points: +x[5],
         unknown: +x[6]
     }));
+    
+    return result.filter(x => typeof x.name === 'string').sort((a, b) => a.name.localeCompare(b.name));
 }
 
 const allyData = getAllyData();
@@ -313,4 +310,4 @@ async function main() {
     dialog.showModal();
 }
 
-main();
+await main();
