@@ -1,3 +1,4 @@
+(() => {
 async function getAllyData() {
     const endpoint = '/map/ally.txt';
 
@@ -311,3 +312,5 @@ async function main() {
 }
 
 await main();
+
+})();
